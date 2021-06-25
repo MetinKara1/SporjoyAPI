@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "0vcBTjVkhfsrMcwB9kDeoYw2pXdMZZFW8owDxyn6IMl/nd+2W+6kgrYfDInPlw9qcsiBtz5UlUxRDbb5qIfEYg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\metin.kara\\Documents\\GitHub\\SporjoyAPI\\SportjoyApi\\Core\\Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\metin.kara\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,15 @@
+C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\Data\bin\Debug\netcoreapp3.1\Data.deps.json
+C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\Data\bin\Debug\netcoreapp3.1\Data.runtimeconfig.json
+C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\Data\bin\Debug\netcoreapp3.1\Data.runtimeconfig.dev.json
+C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\Data\bin\Debug\netcoreapp3.1\Data.dll
+C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\Data\bin\Debug\netcoreapp3.1\Data.pdb
+C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\Data\bin\Debug\netcoreapp3.1\Core.dll
+C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\Data\bin\Debug\netcoreapp3.1\Core.pdb
+C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\Data\obj\Debug\netcoreapp3.1\Data.csprojAssemblyReference.cache
+C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\Data\obj\Debug\netcoreapp3.1\Data.AssemblyInfoInputs.cache
+C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\Data\obj\Debug\netcoreapp3.1\Data.AssemblyInfo.cs
+C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\Data\obj\Debug\netcoreapp3.1\Data.csproj.CoreCompileInputs.cache
+C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\Data\obj\Debug\netcoreapp3.1\Data.csproj.CopyComplete
+C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\Data\obj\Debug\netcoreapp3.1\Data.dll
+C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\Data\obj\Debug\netcoreapp3.1\Data.pdb
+C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\Data\obj\Debug\netcoreapp3.1\Data.genruntimeconfig.cache
