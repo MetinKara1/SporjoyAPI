@@ -30,5 +30,13 @@ namespace Api.Controllers
 
             return Ok(customerResources);
         }
+
+        [HttpPost]
+        public async Task<ActionResult<IEnumerable<CustomerDTO>>> CreateCustomer(Customer customer)
+        {
+            var createCustomer = await _customerService.CreateCustomer(customer);
+
+            return Ok(createCustomer);
+        }
     }
 }
