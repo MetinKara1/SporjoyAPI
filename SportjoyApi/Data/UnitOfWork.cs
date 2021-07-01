@@ -12,6 +12,7 @@ namespace Sporjoy.Data
     {
         private readonly SporjoyDbContext _context;
         private ProductRepository _productRepository;
+        private CustomerRepository _customerRepository;
 
         public UnitOfWork(SporjoyDbContext context)
         {
@@ -19,6 +20,7 @@ namespace Sporjoy.Data
         }
 
         public IProductRepository Products => _productRepository = _productRepository ?? new ProductRepository(_context);
+        public ICustomerRepository Customers => _customerRepository = _customerRepository ?? new CustomerRepository(_context);
 
         public async Task<int> CommitAsync()
         {

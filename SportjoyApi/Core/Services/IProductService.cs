@@ -10,8 +10,8 @@ namespace Sporjoy.Core.Services
     {
         Task<IEnumerable<Product>> GetAllProducts();
         Task<Product> GetProductById(int id);
-        Task<Product> CreateProduct(Product newArtist);
-        Task UpdateProduct(Product artistToBeUpdated, Product artist);
-        Task DeleteProduct(Product artist);
+        Task<Product> CreateProduct(Product newProduct);
+        Task UpdateProduct(Product productToBeUpdated, Product product);
+        Task DeleteProduct(Product product);
     }
 }
