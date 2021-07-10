@@ -31,7 +31,7 @@ namespace Api.Controllers
             this._unitOfWork = unitOfWork;
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<ActionResult<IEnumerable<CustomerDTO>>> CreateCustomer(Customer customer)
         {
             var createCustomer = await _customerService.CreateCustomer(customer);
@@ -63,6 +63,13 @@ namespace Api.Controllers
                 return token;
             }
             return null;
+        }
+
+        [HttpPost("forgot-password")]
+        public async Task<ActionResult<UserLogin>> ForgotPassword([FromBody] UserLogin userLogin)
+        {
+            // if sorugusu ile böyle bir mail var mı? Var ise mail adresine bir kod gönderip şifre değiştirme işlemi yaptırılmalı.
+            return Ok(userLogin);
         }
 
         [HttpGet("[action]")]
