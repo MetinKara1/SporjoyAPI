@@ -9,6 +9,7 @@ C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\SportjoyApi\bin\Debu
 C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\SportjoyApi\bin\Debug\netcoreapp3.1\AutoMapper.dll
 C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\SportjoyApi\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\SportjoyApi\bin\Debug\netcoreapp3.1\FluentValidation.dll
+C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\SportjoyApi\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\SportjoyApi\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Razor.Language.dll
 C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\SportjoyApi\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\SportjoyApi\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll

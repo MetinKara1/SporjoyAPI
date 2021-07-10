@@ -1,4 +1,5 @@
-﻿using Core.Models;
+﻿using Core;
+using Core.Models;
 using Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,6 +16,7 @@ namespace Sporjoy.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<Shipper> Shippers { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public SporjoyDbContext(DbContextOptions<SporjoyDbContext> options)
             : base(options)

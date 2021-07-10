@@ -1,6 +1,7 @@
 ﻿using Api.DTO;
 using AutoMapper;
 using Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Sporjoy.Core.Services;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
+    [Authorize]
     public class ProductController : BaseAPIController
     {
         private readonly IProductService _productService;
