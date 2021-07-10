@@ -56,6 +56,7 @@ namespace SportjoyApi
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<ICustomerService, CustomerService>();
+            services.AddTransient<IEmailService, EmailService>();
             services.AddDbContext<SporjoyDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSwaggerGen(s =>
             {

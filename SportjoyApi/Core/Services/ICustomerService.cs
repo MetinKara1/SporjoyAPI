@@ -13,5 +13,6 @@ namespace Core.Services
         Task<Customer> CreateCustomer(Customer newCustomer);
         Task UpdateCustomer(Customer customerToBeUpdated, Customer customer);
         Task DeleteCustomer(Customer customer);
+        Task<Customer> ForgotPassword(Customer customer);
     }
 }

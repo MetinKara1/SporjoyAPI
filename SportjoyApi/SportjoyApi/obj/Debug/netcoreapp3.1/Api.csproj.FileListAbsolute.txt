@@ -146,3 +146,6 @@ C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\SportjoyApi\obj\Debu
 C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\SportjoyApi\obj\Debug\netcoreapp3.1\Api.dll
 C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\SportjoyApi\obj\Debug\netcoreapp3.1\Api.pdb
 C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\SportjoyApi\obj\Debug\netcoreapp3.1\Api.genruntimeconfig.cache
+C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\SportjoyApi\bin\Debug\netcoreapp3.1\MailKit.dll
+C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\SportjoyApi\bin\Debug\netcoreapp3.1\MimeKit.dll
+C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\SportjoyApi\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll

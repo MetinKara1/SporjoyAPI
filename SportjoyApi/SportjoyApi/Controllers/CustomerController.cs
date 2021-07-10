@@ -18,14 +18,16 @@ namespace Api.Controllers
     public class CustomerController : BaseAPIController
     {
         private readonly ICustomerService _customerService;
+        private readonly IEmailService _emailService;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
         readonly IConfiguration _configuration;
 
-        public CustomerController (ICustomerService customerService, IMapper mapper, IConfiguration configuration, IUnitOfWork unitOfWork)
+        public CustomerController (ICustomerService customerService, IEmailService emailService, IMapper mapper, IConfiguration configuration, IUnitOfWork unitOfWork)
         {
             this._customerService = customerService;
+            this._emailService = emailService;
             this._mapper = mapper;
             this._configuration = configuration;
             this._unitOfWork = unitOfWork;
@@ -66,10 +68,15 @@ namespace Api.Controllers
         }
 
         [HttpPost("forgot-password")]
-        public async Task<ActionResult<UserLogin>> ForgotPassword([FromBody] UserLogin userLogin)
+        public async Task<ActionResult<Customer>> ForgotPassword([FromBody] Customer customer)
         {
             // if sorugusu ile böyle bir mail var mı? Var ise mail adresine bir kod gönderip şifre değiştirme işlemi yaptırılmalı.
-            return Ok(userLogin);
+            var user = await _customerService.ForgotPassword(customer);
+            if (user != null)
+            {
+                _emailService.Send("info@sporjoy.com", "n.metinkara@gmail.com", "Şifre değiştirme işlemi", "");
+            }
+            return Ok(customer);
         }
 
         [HttpGet("[action]")]

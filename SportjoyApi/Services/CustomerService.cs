@@ -21,6 +21,8 @@ namespace Services
             await _unitOfWork.Customers 
                 .AddAsync(newCustomer);
 
+            await _unitOfWork.CommitAsync();
+
             return newCustomer;
         }
 
@@ -29,6 +31,11 @@ namespace Services
             _unitOfWork.Customers.Remove(customer);
 
             await _unitOfWork.CommitAsync();
+        }
+
+        public async Task<Customer> ForgotPassword(Customer customer)
+        {
+            return await _unitOfWork.Customers.SingleOrDefaultAsync(x => x.Email == customer.Email && x.Password == customer.Password);
         }
 
         public async Task<IEnumerable<Customer>> GetAllCustomers()

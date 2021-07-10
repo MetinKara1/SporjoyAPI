@@ -42,6 +42,11 @@ namespace Sporjoy.Data.Repositories
             return Context.Set<TEntity>().FindAsync(id);
         }
 
+        //public ValueTask<TEntity> GetByEmailAndPasswordAsync(string email, string password)
+        //{
+        //    return Context.Set<TEntity>().FindAsync(x => x.Email == email);
+        //}
+
         public void Remove(TEntity entity)
         {
             Context.Set<TEntity>().Remove(entity);

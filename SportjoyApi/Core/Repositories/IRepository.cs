@@ -9,6 +9,7 @@ namespace Sporjoy.Core.Repositories
     public interface IRepository<TEntity> where TEntity : class
     {
         ValueTask<TEntity> GetByIdAsync(int id);
+        //ValueTask<TEntity> GetByEmailAndPassword(string email, string password);
         Task<IEnumerable<TEntity>> GetAllAsync();
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
         Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
