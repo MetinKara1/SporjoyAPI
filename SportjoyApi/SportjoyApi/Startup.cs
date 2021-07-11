@@ -57,7 +57,7 @@ namespace SportjoyApi
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<ICustomerService, CustomerService>();
             services.AddTransient<IEmailService, EmailService>();
-            services.AddDbContext<SporjoyDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<SporjoyDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AsusConnection")));
             services.AddSwaggerGen(s =>
             {
                 s.SwaggerDoc("v1", new OpenApiInfo { Title = "Sporjoy API", Version = "v1" });
