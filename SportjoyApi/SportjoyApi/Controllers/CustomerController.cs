@@ -70,7 +70,6 @@ namespace Api.Controllers
         [HttpPost("forgot-password")]
         public async Task<ActionResult<Customer>> ForgotPassword([FromBody] Customer customer)
         {
-            // if sorugusu ile böyle bir mail var mı? Var ise mail adresine bir kod gönderip şifre değiştirme işlemi yaptırılmalı.
             var user = await _customerService.ForgotPassword(customer);
             if (user != null)
             {

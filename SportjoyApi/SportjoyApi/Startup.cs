@@ -34,6 +34,8 @@ namespace SportjoyApi
 
         public IConfiguration Configuration { get; }
 
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -52,6 +54,9 @@ namespace SportjoyApi
                 };
 
             });
+
+            services.AddCors();
+
             services.AddControllers();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IProductService, ProductService>();
@@ -93,6 +98,12 @@ namespace SportjoyApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(x => x
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()
+                            .SetIsOriginAllowed(origin => true) // allow any origin
+                            .AllowCredentials());
 
             app.UseAuthentication();
             app.UseAuthorization();

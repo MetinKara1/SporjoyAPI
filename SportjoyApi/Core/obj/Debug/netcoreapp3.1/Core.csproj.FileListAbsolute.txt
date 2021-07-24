@@ -6,4 +6,3 @@ C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\Core\obj\Debug\netco
 C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\Core\obj\Debug\netcoreapp3.1\Core.csproj.CoreCompileInputs.cache
 C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\Core\obj\Debug\netcoreapp3.1\Core.dll
 C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\Core\obj\Debug\netcoreapp3.1\Core.pdb
-C:\Users\metin.kara\Documents\GitHub\SporjoyAPI\SportjoyApi\Core\obj\Debug\netcoreapp3.1\Core.csprojAssemblyReference.cache
