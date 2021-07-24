@@ -9,53 +9,53 @@ namespace Data.Configurations
 {
     public class ProductConfiguration // : IEntityTypeConfiguration<Product>
     {
-        public void Configure(ModelBuilder modelBuilder) // EntityTypeBuilder<Product>
-        {
+        //public void Configure(ModelBuilder modelBuilder) // EntityTypeBuilder<Product>
+        //{
 
-            modelBuilder.Entity<OrderDetail>()
-        .HasKey(od => new { od.OrderId, od.ProductId });
-            modelBuilder.Entity<OrderDetail>()
-                .HasOne(od => od.Product)
-                .WithMany(p => p.OrderDetail)
-                .HasForeignKey(p => p.ProductId);
-            modelBuilder.Entity<OrderDetail>()
-                .HasOne(od => od.Order)
-                .WithMany(o => o.OrderDetail)
-                .HasForeignKey(o => o.OrderId);
-            //builder
-            //    .HasKey(a => a.Id);
+        //    modelBuilder.Entity<OrderDetail>()
+        //.HasKey(od => new { od.OrderId, od.ProductId });
+        //    modelBuilder.Entity<OrderDetail>()
+        //        .HasOne(od => od.Product)
+        //        .WithMany(p => p.OrderDetail)
+        //        .HasForeignKey(p => p.ProductId);
+        //    modelBuilder.Entity<OrderDetail>()
+        //        .HasOne(od => od.Order)
+        //        .WithMany(o => o.OrderDetail)
+        //        .HasForeignKey(o => o.OrderId);
+        //    //builder
+        //    //    .HasKey(a => a.Id);
 
-            //builder
-            //    .Property(m => m.Id)
-            //    .UseIdentityColumn();
+        //    //builder
+        //    //    .Property(m => m.Id)
+        //    //    .UseIdentityColumn();
 
-            //builder
-            //    .Property(m => m.Name)
-            //    .IsRequired()
-            //    .HasMaxLength(50);
+        //    //builder
+        //    //    .Property(m => m.Name)
+        //    //    .IsRequired()
+        //    //    .HasMaxLength(50);
 
-            //builder
-            //    .ToTable("Artists");
+        //    //builder
+        //    //    .ToTable("Artists");
 
-            //builder
-            //    .HasKey(m => m.Id);
+        //    //builder
+        //    //    .HasKey(m => m.Id);
 
-            //builder
-            //    .Property(m => m.Id)
-            //    .UseIdentityColumn();
+        //    //builder
+        //    //    .Property(m => m.Id)
+        //    //    .UseIdentityColumn();
 
-            //builder
-            //    .Property(m => m.Name)
-            //    .IsRequired()
-            //    .HasMaxLength(50);
+        //    //builder
+        //    //    .Property(m => m.Name)
+        //    //    .IsRequired()
+        //    //    .HasMaxLength(50);
 
-            //builder
-            //    .HasOne(m => m.Artist)
-            //    .WithMany(a => a.Musics)
-            //    .HasForeignKey(m => m.ArtistId);
+        //    //builder
+        //    //    .HasOne(m => m.Artist)
+        //    //    .WithMany(a => a.Musics)
+        //    //    .HasForeignKey(m => m.ArtistId);
 
-            //builder
-            //    .ToTable("Musics");
-        }
+        //    //builder
+        //    //    .ToTable("Musics");
+        //}
     }
 }

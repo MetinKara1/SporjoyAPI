@@ -14,10 +14,10 @@ namespace Sporjoy.Api.Mapping
         public MappingProfile()
         {
             // Domain to Resource
-            CreateMap<Product, ProductDTO>();
+            //CreateMap<Product, ProductDTO>();
 
             // Resource to Domain
-            CreateMap<ProductDTO, Product>();
+            //CreateMap<ProductDTO, Product>();
 
             //CreateMap<SaveMusicDTO, Music>();
             //CreateMap<SaveArtistDTO, Artist>();

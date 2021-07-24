@@ -8,8 +8,7 @@ namespace Sporjoy.Core
 {
     public interface IUnitOfWork : IDisposable
     {
-        IProductRepository Products { get; }
-        ICustomerRepository Customers { get; }
+        IPlayerRepository Customers { get; }
         Task<int> CommitAsync();
     }
 }

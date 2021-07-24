@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace Sporjoy.Data.Repositories
 {
-    public class CustomerRepository : Repository<Customer>, ICustomerRepository
+    public class CustomerRepository : Repository<Player>, IPlayerRepository
     {
         public CustomerRepository(SporjoyDbContext context)
             : base(context)
         { }
 
-        public async Task<IEnumerable<Customer>> GetAllCustomersAsync()
+        public async Task<IEnumerable<Player>> GetAllCustomersAsync()
         {
             return await SporjoyDbContext.Customers
                 .Include(a => a.Id)
                 .ToListAsync();
         }
 
-        public Task<Customer> GetWithCustomerByIdAsync(int id)
+        public Task<Player> GetWithCustomerByIdAsync(int id)
         {
             return SporjoyDbContext.Customers
                 .Include(a => a.Id)

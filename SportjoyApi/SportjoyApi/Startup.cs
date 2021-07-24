@@ -10,9 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Sporjoy.Core;
-using Sporjoy.Core.Services;
 using Sporjoy.Data;
-using Sporjoy.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,8 +57,7 @@ namespace SportjoyApi
 
             services.AddControllers();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<IProductService, ProductService>();
-            services.AddTransient<ICustomerService, CustomerService>();
+            services.AddTransient<IPlayerService, PlayerService>();
             services.AddTransient<IEmailService, EmailService>();
             services.AddDbContext<SporjoyDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AsusConnection")));
             services.AddSwaggerGen(s =>
