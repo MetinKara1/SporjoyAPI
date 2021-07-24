@@ -73,9 +73,19 @@ namespace Api.Controllers
             var user = await _customerService.ForgotPassword(customer);
             if (user != null)
             {
-                _emailService.Send("info@sporjoy.com", "n.metinkara@gmail.com", "Şifre değiştirme işlemi", "");
+                _emailService.Send("info@sporjoy.com", "n.metinkara@gmail.com", "Şifre Değiştirme İşlemi    ", "");
             }
             return Ok(customer);
+        }
+
+        [Authorize]
+        [HttpPost("change-password")]
+        public async Task<ActionResult<Customer>> ChangePassword(int userId, string password)
+        {
+            var updatedUser = await _customerService.GetCustomerById(userId);
+            updatedUser.Password = password;
+            await _customerService.UpdateCustomer(updatedUser);
+            return Ok(password);
         }
 
         [HttpGet("[action]")]

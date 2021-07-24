@@ -38,6 +38,11 @@ namespace Services
             return await _unitOfWork.Customers.SingleOrDefaultAsync(x => x.Email == customer.Email && x.Password == customer.Password);
         }
 
+        //public async Task<Customer> ChangePassword(string password)
+        //{
+        //    return await _unitOfWork.Customers. SingleOrDefaultAsync(x => x.Email == customer.Email && x.Password == customer.Password);
+        //}
+
         public async Task<IEnumerable<Customer>> GetAllCustomers()
         {
             return await _unitOfWork.Customers.GetAllAsync();
@@ -48,10 +53,8 @@ namespace Services
             return await _unitOfWork.Customers.GetByIdAsync(id);
         }
 
-        public async Task UpdateCustomer(Customer customerToBeUpdated, Customer customer)
+        public async Task UpdateCustomer(Customer customerToBeUpdated)
         {
-            customerToBeUpdated.Id = customer.Id;
-
             await _unitOfWork.CommitAsync();
         }
     }

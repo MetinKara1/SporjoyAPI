@@ -11,8 +11,9 @@ namespace Core.Services
         Task<IEnumerable<Customer>> GetAllCustomers();
         Task<Customer> GetCustomerById(int id);
         Task<Customer> CreateCustomer(Customer newCustomer);
-        Task UpdateCustomer(Customer customerToBeUpdated, Customer customer);
+        Task UpdateCustomer(Customer customerToBeUpdated);
         Task DeleteCustomer(Customer customer);
         Task<Customer> ForgotPassword(Customer customer);
+        //Task<Customer> ChangePassword(string password);
     }
 }
