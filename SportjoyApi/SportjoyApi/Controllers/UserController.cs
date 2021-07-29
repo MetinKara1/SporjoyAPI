@@ -15,18 +15,18 @@ using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
-    public class PlayerController : BaseAPIController
+    public class UserController : BaseAPIController
     {
-        private readonly IPlayerService _playerService;
+        private readonly IUserService _userService;
         private readonly IEmailService _emailService;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
         readonly IConfiguration _configuration;
 
-        public PlayerController (IPlayerService playerService, IEmailService emailService, IMapper mapper, IConfiguration configuration, IUnitOfWork unitOfWork)
+        public UserController (IUserService playerService, IEmailService emailService, IMapper mapper, IConfiguration configuration, IUnitOfWork unitOfWork)
         {
-            this._playerService = playerService;
+            this._userService = playerService;
             this._emailService = emailService;
             this._mapper = mapper;
             this._configuration = configuration;
@@ -34,9 +34,9 @@ namespace Api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<IEnumerable<PlayerDTO>>> CreatePlayer(Player player)
+        public async Task<ActionResult<IEnumerable<PlayerDTO>>> CreatePlayer(User user)
         {
-            var createPlayer = await _playerService.CreatePlayer(player);
+            var createPlayer = await _userService.CreateUser(user);
 
             return Ok(createPlayer);
         }
@@ -67,24 +67,24 @@ namespace Api.Controllers
             return null;
         }
 
-        //[HttpPost("forgot-password")]
-        //public async Task<ActionResult<Player>> ForgotPassword([FromBody] User user)
-        //{
-        //    var userExist = await _playerService.ForgotPassword(user);
-        //    if (userExist != null)
-        //    {
-        //        _emailService.Send("info@sporjoy.com", "n.metinkara@gmail.com", "Şifre Değiştirme İşlemi    ", "");
-        //    }
-        //    return Ok(user);
-        //}
+        [HttpPost("forgot-password")]
+        public async Task<ActionResult<Player>> ForgotPassword([FromBody] User user)
+        {
+            var userExist = await _userService.ForgotPassword(user);
+            if (userExist != null)
+            {
+                _emailService.Send("info@sporjoy.com", "n.metinkara@gmail.com", "Şifre Değiştirme İşlemi    ", "");
+            }
+            return Ok(user);
+        }
 
         [Authorize]
         [HttpPost("change-password")]
         public async Task<ActionResult<Player>> ChangePassword(int userId, string password)
         {
-            var updatedPlayer = await _playerService.GetPlayerById(userId);
-            updatedPlayer.Password = password;
-            await _playerService.UpdatePlayer(updatedPlayer);
+            var updatedUser = await _userService.GetUserById(userId);
+            updatedUser.Password = password;
+            await _userService.UpdateUser(updatedUser);
             return Ok(password);
         }
 
@@ -115,8 +115,8 @@ namespace Api.Controllers
         [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<PlayerDTO>>> GetAllUsers()
         {
-            var players = await _playerService.GetAllPlayers();
-            var playerResources = _mapper.Map<IEnumerable<Player>, IEnumerable<PlayerDTO>>(players);
+            var users = await _userService.GetAllUsers();
+            var playerResources = _mapper.Map<IEnumerable<User>, IEnumerable<PlayerDTO>>(users);
 
             return Ok(playerResources);
         }

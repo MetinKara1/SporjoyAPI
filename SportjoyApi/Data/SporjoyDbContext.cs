@@ -11,8 +11,11 @@ namespace Sporjoy.Data
     public class SporjoyDbContext : DbContext
     {
         public DbSet<Payment> Payments { get; set; }
-        public DbSet<Player> Customers { get; set; }
+        public DbSet<Player> Players { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<StaffTrainer> StaffTrainers { get; set; }
+        public DbSet<Club> Clubs { get; set; }
+        public DbSet<ClubProperties> ClubProperties { get; set; }
 
         public SporjoyDbContext(DbContextOptions<SporjoyDbContext> options)
             : base(options)

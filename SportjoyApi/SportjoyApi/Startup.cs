@@ -57,7 +57,7 @@ namespace SportjoyApi
 
             services.AddControllers();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<IPlayerService, PlayerService>();
+            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IEmailService, EmailService>();
             services.AddDbContext<SporjoyDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AsusConnection")));
             services.AddSwaggerGen(s =>

@@ -16,6 +16,9 @@ namespace Core.Models
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public string Club { get; set; }
+        public string Trainer { get; set; }
+        public string MemberType { get; set; }
         public DateTime DateEntered { get; set; }
 
     }

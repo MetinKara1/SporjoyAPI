@@ -11,14 +11,16 @@ namespace Sporjoy.Data
     public class UnitOfWork : IUnitOfWork
     {
         private readonly SporjoyDbContext _context;
-        private CustomerRepository _customerRepository;
+        private UserRepository _userRepository;
+        private PlayerRepository _playerRepository;
 
         public UnitOfWork(SporjoyDbContext context)
         {
             this._context = context;
         }
 
-        public IPlayerRepository Customers => _customerRepository = _customerRepository ?? new CustomerRepository(_context);
+        public IUserRepository Users => _userRepository = _userRepository ?? new UserRepository(_context);
+        public IPlayerRepository Players => _playerRepository = _playerRepository ?? new PlayerRepository(_context);
 
         public async Task<int> CommitAsync()
         {

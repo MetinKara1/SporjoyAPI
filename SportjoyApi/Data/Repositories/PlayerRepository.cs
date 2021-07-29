@@ -1,4 +1,5 @@
-﻿using Core.Models;
+﻿using Core;
+using Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Sporjoy.Core.Repositories;
 using System;
@@ -8,22 +9,22 @@ using System.Threading.Tasks;
 
 namespace Sporjoy.Data.Repositories
 {
-    public class CustomerRepository : Repository<Player>, IPlayerRepository
+    public class PlayerRepository : Repository<Player>, IPlayerRepository
     {
-        public CustomerRepository(SporjoyDbContext context)
+        public PlayerRepository(SporjoyDbContext context)
             : base(context)
         { }
 
-        public async Task<IEnumerable<Player>> GetAllCustomersAsync()
+        public async Task<IEnumerable<Player>> GetAllPlayersAsync()
         {
-            return await SporjoyDbContext.Customers
+            return await SporjoyDbContext.Players
                 .Include(a => a.Id)
                 .ToListAsync();
         }
 
-        public Task<Player> GetWithCustomerByIdAsync(int id)
+        public Task<Player> GetWithPlayerByIdAsync(int id)
         {
-            return SporjoyDbContext.Customers
+            return SporjoyDbContext.Players
                 .Include(a => a.Id)
                 .SingleOrDefaultAsync(a => a.Id == id);
         }

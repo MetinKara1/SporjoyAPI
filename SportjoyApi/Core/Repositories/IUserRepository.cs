@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Sporjoy.Core.Repositories
 {
-    public interface IPlayerRepository : IRepository<Player>
+    public interface IUserRepository : IRepository<User>
     {
-        Task<IEnumerable<Player>> GetAllPlayersAsync();
-        Task<Player> GetWithPlayerByIdAsync(int id);
+        Task<IEnumerable<User>> GetAllUsersAsync();
+        Task<User> GetWithUserByIdAsync(int id);
     }
 }
