@@ -3915,23 +3915,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\nmeti\\.nuget\\packages\\": {},
+    "C:\\Users\\metin.kara\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nmeti\\OneDrive\\Belgeler\\GitHub\\SporjoyAPI\\SportjoyApi\\Services\\Services.csproj",
+      "projectUniqueName": "C:\\Users\\metin.kara\\Documents\\GitHub\\SporjoyAPI\\SportjoyApi\\Services\\Services.csproj",
       "projectName": "Services",
-      "projectPath": "C:\\Users\\nmeti\\OneDrive\\Belgeler\\GitHub\\SporjoyAPI\\SportjoyApi\\Services\\Services.csproj",
-      "packagesPath": "C:\\Users\\nmeti\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nmeti\\OneDrive\\Belgeler\\GitHub\\SporjoyAPI\\SportjoyApi\\Services\\obj\\",
+      "projectPath": "C:\\Users\\metin.kara\\Documents\\GitHub\\SporjoyAPI\\SportjoyApi\\Services\\Services.csproj",
+      "packagesPath": "C:\\Users\\metin.kara\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\metin.kara\\Documents\\GitHub\\SporjoyAPI\\SportjoyApi\\Services\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\nmeti\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\metin.kara\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3946,8 +3946,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\nmeti\\OneDrive\\Belgeler\\GitHub\\SporjoyAPI\\SportjoyApi\\Core\\Core.csproj": {
-              "projectPath": "C:\\Users\\nmeti\\OneDrive\\Belgeler\\GitHub\\SporjoyAPI\\SportjoyApi\\Core\\Core.csproj"
+            "C:\\Users\\metin.kara\\Documents\\GitHub\\SporjoyAPI\\SportjoyApi\\Core\\Core.csproj": {
+              "projectPath": "C:\\Users\\metin.kara\\Documents\\GitHub\\SporjoyAPI\\SportjoyApi\\Core\\Core.csproj"
             }
           }
         }
@@ -3982,7 +3982,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

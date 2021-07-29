@@ -1,4 +1,5 @@
-﻿using Sporjoy.Core.Repositories;
+﻿using Core.Repositories;
+using Sporjoy.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,6 +11,8 @@ namespace Sporjoy.Core
     {
         IUserRepository Users { get; }
         IPlayerRepository Players { get; }
+        IClubRepository Clubs { get; }
+        IStaffTrainerRepository StaffTrainers { get; }
         Task<int> CommitAsync();
     }
 }
