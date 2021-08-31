@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Core.Repositories
 {
-    public interface IClubRepository: IRepository<Club>
+    public interface IStaffTrainerRepository : IRepository<StaffTrainer>
     {
-        Task<IEnumerable<Club>> GetAllClubsAsync();
-        Task<Club> GetWithClubByIdAsync(int id);
+        Task<IEnumerable<StaffTrainer>> GetAllStaffTrainersAsync();
+        Task<StaffTrainer> GetWithStaffTrainerByIdAsync(int id);
     }
 }

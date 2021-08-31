@@ -20,6 +20,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Core.Services;
 using Services;
+using Microsoft.AspNetCore.Http;
 
 namespace SportjoyApi
 {
@@ -50,6 +51,8 @@ namespace SportjoyApi
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Token:SecurityKey"])),
                     ClockSkew = TimeSpan.Zero
                 };
+                option.SaveToken = true;
+                option.RequireHttpsMetadata = false;
 
             });
 
@@ -59,6 +62,9 @@ namespace SportjoyApi
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<IClubService, ClubService>();
+            services.AddTransient<IStaffTrainerService, StaffTrainerService>();
+            services.AddTransient<IPlayerService, PlayerService>();
             services.AddDbContext<SporjoyDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AsusConnection")));
             services.AddSwaggerGen(s =>
             {

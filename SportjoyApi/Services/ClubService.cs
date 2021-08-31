@@ -41,7 +41,7 @@ namespace Services
 
         public async Task<IEnumerable<Club>> GetAllClubs()
         {
-            return await _unitOfWork.Clubs.GetAllAsync();
+            return await _unitOfWork.Clubs.GetAllClubsAsync();
         }
 
         public async Task<Club> GetClubById(int id)
@@ -52,6 +52,24 @@ namespace Services
         public async Task UpdateClub(Club clubToBeUpdated)
         {
             await _unitOfWork.CommitAsync();
+        }
+
+        public async Task<Club> GetCommentsById(int id)
+        {
+            return await _unitOfWork.Clubs.GetCommentByIdAsync(id);
+        }
+
+        public async Task CreateComment(Comment comment)
+        {
+            await _unitOfWork.Clubs.CreateCommentAsync(comment);
+
+            await _unitOfWork.CommitAsync();
+        }
+
+        public List<Club> GetClubByFilters(Club club) // Task<Club>
+        {
+            return _unitOfWork.Clubs.GetClubByFiltersAsync(club);
+
         }
     }
 }

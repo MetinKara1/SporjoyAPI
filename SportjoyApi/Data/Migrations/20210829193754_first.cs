@@ -8,17 +8,40 @@ namespace Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ClubProperties",
+                name: "Clubs",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PropertyName = table.Column<string>(nullable: true),
-                    PropertyValue = table.Column<string>(nullable: true)
+                    ClubName = table.Column<string>(nullable: true),
+                    ContactPerson = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    County = table.Column<string>(nullable: true),
+                    Adress = table.Column<string>(nullable: true),
+                    DescribeClub = table.Column<string>(nullable: true),
+                    ManCoachCount = table.Column<int>(nullable: false),
+                    WomenCoachCount = table.Column<int>(nullable: false),
+                    TrainingTime = table.Column<DateTime>(nullable: false),
+                    AgeGroups = table.Column<string>(nullable: true),
+                    isAvailableForDisabled = table.Column<bool>(nullable: false),
+                    havePrivateLesson = table.Column<bool>(nullable: false),
+                    Due = table.Column<int>(nullable: false),
+                    tryLessonPrice = table.Column<int>(nullable: false),
+                    haveParking = table.Column<bool>(nullable: false),
+                    haveShower = table.Column<bool>(nullable: false),
+                    SaloonMeters = table.Column<float>(nullable: false),
+                    TrainingCountPerWeek = table.Column<int>(nullable: false),
+                    Photos = table.Column<string>(nullable: true),
+                    Videos = table.Column<string>(nullable: true),
+                    PeymentType = table.Column<string>(nullable: true),
+                    Branch = table.Column<string>(nullable: true),
+                    MembershipType = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ClubProperties", x => x.Id);
+                    table.PrimaryKey("PK_Clubs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -95,38 +118,67 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Clubs",
+                name: "ClubProperties",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ClubName = table.Column<string>(nullable: true),
-                    City = table.Column<string>(nullable: true),
-                    County = table.Column<string>(nullable: true),
-                    Fiyat = table.Column<int>(nullable: false),
-                    ClubProtertiesId = table.Column<int>(nullable: true)
+                    PropertyName = table.Column<string>(nullable: true),
+                    PropertyValue = table.Column<string>(nullable: true),
+                    ClubId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clubs", x => x.Id);
+                    table.PrimaryKey("PK_ClubProperties", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Clubs_ClubProperties_ClubProtertiesId",
-                        column: x => x.ClubProtertiesId,
-                        principalTable: "ClubProperties",
+                        name: "FK_ClubProperties_Clubs_ClubId",
+                        column: x => x.ClubId,
+                        principalTable: "Clubs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserComment = table.Column<string>(nullable: true),
+                    CommentDate = table.Column<DateTime>(nullable: false),
+                    Commenter = table.Column<string>(nullable: true),
+                    IsApproved = table.Column<bool>(nullable: false),
+                    ClubId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_Clubs_ClubId",
+                        column: x => x.ClubId,
+                        principalTable: "Clubs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Clubs_ClubProtertiesId",
-                table: "Clubs",
-                column: "ClubProtertiesId");
+                name: "IX_ClubProperties_ClubId",
+                table: "ClubProperties",
+                column: "ClubId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_ClubId",
+                table: "Comments",
+                column: "ClubId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Clubs");
+                name: "ClubProperties");
+
+            migrationBuilder.DropTable(
+                name: "Comments");
 
             migrationBuilder.DropTable(
                 name: "Payments");
@@ -141,7 +193,7 @@ namespace Data.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "ClubProperties");
+                name: "Clubs");
         }
     }
 }

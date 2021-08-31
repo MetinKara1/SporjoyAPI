@@ -10,22 +10,22 @@ using System.Threading.Tasks;
 
 namespace Sporjoy.Data.Repositories
 {
-    public class ClubRepository : Repository<Club>, IClubRepository
+    public class StaffTrainerRepository : Repository<StaffTrainer>, IStaffTrainerRepository
     {
-        public ClubRepository(SporjoyDbContext context)
+        public StaffTrainerRepository(SporjoyDbContext context)
             : base(context)
         { }
 
-        public async Task<IEnumerable<Club>> GetAllClubsAsync()
+        public async Task<IEnumerable<StaffTrainer>> GetAllStaffTrainersAsync()
         {
-            return await SporjoyDbContext.Clubs
+            return await SporjoyDbContext.StaffTrainers
                 .Include(a => a.Id)
                 .ToListAsync();
         }
 
-        public Task<Club> GetWithClubByIdAsync(int id)
+        public Task<StaffTrainer> GetWithStaffTrainerByIdAsync(int id)
         {
-            return SporjoyDbContext.Clubs
+            return SporjoyDbContext.StaffTrainers
                 .Include(a => a.Id)
                 .SingleOrDefaultAsync(a => a.Id == id);
         }

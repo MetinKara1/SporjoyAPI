@@ -10,24 +10,49 @@ using System.Threading.Tasks;
 
 namespace Sporjoy.Data.Repositories
 {
-    public class StaffTrainerRepository : Repository<StaffTrainer>, IStaffTrainerRepository
+    public class ClubRepository : Repository<Club>, IClubRepository
     {
-        public StaffTrainerRepository(SporjoyDbContext context)
+        public ClubRepository(SporjoyDbContext context)
             : base(context)
         { }
 
-        public async Task<IEnumerable<StaffTrainer>> GetAllStaffTrainersAsync()
+        public async Task<IEnumerable<Club>> GetAllClubsAsync()
         {
-            return await SporjoyDbContext.StaffTrainers
-                .Include(a => a.Id)
+
+            var test = await SporjoyDbContext.Clubs
+                //.Include(a => a.Id)
                 .ToListAsync();
+
+            return test;
         }
 
-        public Task<StaffTrainer> GetWithStaffTrainerByIdAsync(int id)
+        public Task<Club> GetWithClubByIdAsync(int id)
         {
-            return SporjoyDbContext.StaffTrainers
+            return SporjoyDbContext.Clubs
                 .Include(a => a.Id)
                 .SingleOrDefaultAsync(a => a.Id == id);
+        }
+
+        public Task<Club> GetCommentByIdAsync(int id)
+        {
+            return SporjoyDbContext.Clubs
+                .Include(a => a.Comments)
+                .SingleOrDefaultAsync(a => a.Id == id);
+        }
+
+        public async Task CreateCommentAsync(Comment comment)
+        {
+            SporjoyDbContext.Comments.Add(comment);
+        }
+
+        public List<Club> GetClubByFiltersAsync(Club club) // Task<Club>
+        {
+            return SporjoyDbContext.Clubs.ToListAsync().Result.FindAll(x => x.ClubName == club.ClubName || x.City == club.City || x.County == club.County || x.haveParking == club.haveParking || x.havePrivateLesson == club.havePrivateLesson || x.haveShower == club.haveShower || x.isAvailableForDisabled == club.isAvailableForDisabled || x.PeymentType == club.PeymentType || x.MembershipType == club.MembershipType || x.Branch == club.Branch);
+
+            
+
+            //return SporjoyDbContext.Clubs
+            //    .SingleOrDefaultAsync(x => x.ClubName == club.ClubName || x.City == club.City || x.haveParking == club.haveParking || x.havePrivateLesson == club.havePrivateLesson || x.haveShower == club.haveShower || x.isAvailableForDisabled == club.isAvailableForDisabled || x.PeymentType == club.PeymentType || x.MembershipType == club.MembershipType || x.Branch == club.Branch);
         }
 
         private SporjoyDbContext SporjoyDbContext

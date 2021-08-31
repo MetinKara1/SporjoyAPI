@@ -5,12 +5,16 @@ using Core.Models;
 using Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Sporjoy.Core;
+using Sporjoy.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Api.Controllers
@@ -18,23 +22,24 @@ namespace Api.Controllers
     public class ClubController : BaseAPIController
     {
         private readonly IClubService _clubService;
-        private readonly IEmailService _emailService;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
         readonly IConfiguration _configuration;
 
-        public ClubController (IClubService clubService, IEmailService emailService, IMapper mapper, IConfiguration configuration, IUnitOfWork unitOfWork)
+        public ClubController (IClubService clubService, IUserService userService, IMapper mapper, IConfiguration configuration, IUnitOfWork unitOfWork)
         {
             this._clubService = clubService;
-            this._emailService = emailService;
+            this._userService = userService;
             this._mapper = mapper;
             this._configuration = configuration;
             this._unitOfWork = unitOfWork;
         }
 
+        [Authorize]
         [HttpPost("register")]
-        public async Task<ActionResult<IEnumerable<ClubDTO>>> CreatePlayer(Club club)
+        public async Task<ActionResult<IEnumerable<ClubDTO>>> CreateClub([FromBody]Club club)
         {
             var createClub = await _clubService.CreateClub(club);
 
@@ -62,14 +67,53 @@ namespace Api.Controllers
         //    return Ok(password);
         //}
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<ClubDTO>>> GetAllClubs()
         {
             var clubs = await _clubService.GetAllClubs();
-            var clubResources = _mapper.Map<IEnumerable<Club>, IEnumerable<ClubDTO>>(clubs);
+            //var clubResources = _mapper.Map<IEnumerable<Club>, IEnumerable<ClubDTO>>(clubs);
 
-            return Ok(clubResources);
+            return Ok(clubs);
         }
+
+        [HttpGet("clubDetail")]
+        public async Task<ActionResult<IEnumerable<ClubDTO>>> GetClubDetail(int id)
+        {
+            var club = await _clubService.GetClubById(id);
+            //var clubResources = _mapper.Map<IEnumerable<Club>, IEnumerable<ClubDTO>>(clubs);
+
+            return Ok(club);
+        }
+
+        [HttpGet("comment")]
+        public async Task<ActionResult<IEnumerable<ClubDTO>>> GetCommentById(int id)
+        {
+            var comments = await _clubService.GetCommentsById(id);
+            //var clubResources = _mapper.Map<IEnumerable<Club>, IEnumerable<ClubDTO>>(clubs);
+
+            return Ok(comments);
+        }
+
+        [HttpPost("comment")]
+        public async Task<ActionResult<IEnumerable<ClubDTO>>> CreateComment([FromBody] Comment comment)
+        {
+            var user = await _userService.GetUserById(int.Parse(comment.Commenter));
+            comment.Commenter = user.Name + " " + user.Surname;
+            comment.CommentDate = DateTime.Now;
+            await _clubService.CreateComment(comment);
+            //var clubResources = _mapper.Map<IEnumerable<Club>, IEnumerable<ClubDTO>>(clubs);
+
+            return Ok();
+        }
+
+        [HttpPost("filters")]
+        public async Task<ActionResult<IEnumerable<ClubDTO>>> GetClubByFilters([FromBody] Club club)
+        {
+            var filteredClubs = _clubService.GetClubByFilters(club); // await
+
+            return Ok(filteredClubs);
+        }
+
     }
 }

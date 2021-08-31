@@ -1,4 +1,5 @@
 ﻿using Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Sporjoy.Core;
 using Sporjoy.Core.Repositories;
 using Sporjoy.Data.Repositories;
@@ -26,6 +27,7 @@ namespace Sporjoy.Data
         public IPlayerRepository Players => _playerRepository = _playerRepository ?? new PlayerRepository(_context);
         public IClubRepository Clubs => _clubRepository = _clubRepository ?? new ClubRepository(_context);
         public IStaffTrainerRepository StaffTrainers => _staffTrainerRepository = _staffTrainerRepository ?? new StaffTrainerRepository(_context);
+
 
         public async Task<int> CommitAsync()
         {

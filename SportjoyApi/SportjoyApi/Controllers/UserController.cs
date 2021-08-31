@@ -3,6 +3,7 @@ using AutoMapper;
 using Core;
 using Core.Models;
 using Core.Services;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,7 @@ using Sporjoy.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Api.Controllers
@@ -42,19 +44,20 @@ namespace Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<Token>> Login([FromForm] UserLogin userLogin)
+        public async Task<ActionResult<Token>> Login([FromBody] UserLogin userLogin)
         {
-            var user = new User()
-            {
-                Email = "mail",
-                Password = "123"
-            };
+
+            var users = await _userService.GetAllUsers();
+
+            var user = users.FirstOrDefault(x => x.Email == userLogin.Email);
 
             if (user != null)
             {
                 //Token üretiliyor.
                 TokenHandler tokenHandler = new TokenHandler(_configuration);
                 Token token = tokenHandler.CreateAccessToken(user);
+
+                token.UserId = user.Id;
 
                 //Refresh token Users tablosuna işleniyor.
                 user.RefreshToken = token.RefreshToken;

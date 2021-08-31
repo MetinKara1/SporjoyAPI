@@ -8,6 +8,7 @@ namespace Core.Services
 {
     public interface IUserService
     {
+        //Task<User> GetUserAsync();
         Task<IEnumerable<User>> GetAllUsers();
         Task<User> GetUserById(int id);
         Task<User> CreateUser(User newUser);

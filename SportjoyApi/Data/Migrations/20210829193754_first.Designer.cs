@@ -10,7 +10,7 @@ using Sporjoy.Data;
 namespace Data.Migrations
 {
     [DbContext(typeof(SporjoyDbContext))]
-    [Migration("20210724220327_first")]
+    [Migration("20210829193754_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,24 +28,82 @@ namespace Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Adress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AgeGroups")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Branch")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ClubName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ClubProtertiesId")
-                        .HasColumnType("int");
+                    b.Property<string>("ContactPerson")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("County")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Fiyat")
+                    b.Property<string>("DescribeClub")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Due")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ManCoachCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MembershipType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PeymentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Photos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("SaloonMeters")
+                        .HasColumnType("real");
+
+                    b.Property<int>("TrainingCountPerWeek")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("TrainingTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Videos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("WomenCoachCount")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("haveParking")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("havePrivateLesson")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("haveShower")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isAvailableForDisabled")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("tryLessonPrice")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClubProtertiesId");
 
                     b.ToTable("Clubs");
                 });
@@ -57,6 +115,9 @@ namespace Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("ClubId")
+                        .HasColumnType("int");
+
                     b.Property<string>("PropertyName")
                         .HasColumnType("nvarchar(max)");
 
@@ -65,7 +126,38 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClubId");
+
                     b.ToTable("ClubProperties");
+                });
+
+            modelBuilder.Entity("Core.Models.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClubId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CommentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Commenter")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserComment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClubId");
+
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("Core.Models.Payment", b =>
@@ -191,11 +283,20 @@ namespace Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Core.Models.Club", b =>
+            modelBuilder.Entity("Core.Models.ClubProperties", b =>
                 {
-                    b.HasOne("Core.Models.ClubProperties", "ClubProterties")
-                        .WithMany()
-                        .HasForeignKey("ClubProtertiesId");
+                    b.HasOne("Core.Models.Club", null)
+                        .WithMany("ClubProterties")
+                        .HasForeignKey("ClubId");
+                });
+
+            modelBuilder.Entity("Core.Models.Comment", b =>
+                {
+                    b.HasOne("Core.Models.Club", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("ClubId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
