@@ -20,15 +20,17 @@ namespace Api.Controllers
     public class UserController : BaseAPIController
     {
         private readonly IUserService _userService;
+        private readonly IClubService _clubService;
         private readonly IEmailService _emailService;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
         readonly IConfiguration _configuration;
 
-        public UserController (IUserService playerService, IEmailService emailService, IMapper mapper, IConfiguration configuration, IUnitOfWork unitOfWork)
+        public UserController (IUserService userService, IClubService clubService, IEmailService emailService, IMapper mapper, IConfiguration configuration, IUnitOfWork unitOfWork)
         {
-            this._userService = playerService;
+            this._userService = userService;
+            this._clubService = clubService;
             this._emailService = emailService;
             this._mapper = mapper;
             this._configuration = configuration;
@@ -68,6 +70,30 @@ namespace Api.Controllers
                 return token;
             }
             return null;
+        }
+
+        
+        [HttpGet("check-phone")]
+        public async Task<ActionResult<IEnumerable<PlayerDTO>>> CheckPhone(string phone)
+        {
+            var users = await _userService.GetAllUsers();
+            var user = users.Where(x => x.Phone == phone);
+            if (user != null)
+            {
+                var result = new
+                {
+                    success = true
+                };
+                return Ok(result);
+            } 
+            else
+            {
+                var result = new
+                {
+                    success = false
+                };
+                return Ok(result);
+            }
         }
 
         [HttpPost("forgot-password")]
@@ -122,6 +148,42 @@ namespace Api.Controllers
             var playerResources = _mapper.Map<IEnumerable<User>, IEnumerable<PlayerDTO>>(users);
 
             return Ok(playerResources);
+        }
+
+        [Authorize]
+        [HttpGet("get-user")]
+        public async Task<ActionResult<IEnumerable<PlayerDTO>>> GetUserById(int id)
+        {
+            var user = await _userService.GetUserById(id);
+            var club = new Club();
+            if (user != null )
+            {
+                club = await _clubService.GetClubByMail(user.Email);
+            }
+            //var playerResources = _mapper.Map<IEnumerable<User>, IEnumerable<PlayerDTO>>(users);
+            var result = new 
+            {
+                user = user,
+                club = club
+            };
+
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpPost("update-user")]
+        public async Task<ActionResult<IEnumerable<PlayerDTO>>> UpdateUser(User user)
+        {
+            var updateItem = await _userService.GetUserById(user.Id);
+            if (updateItem != null)
+            {
+                updateItem.Name = user.Name;
+                updateItem.Surname = user.Surname;
+                updateItem.Email = user.Email;
+                await _userService.UpdateUser(updateItem);
+            }
+            
+            return Ok();
         }
     }
 }

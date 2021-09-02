@@ -11,6 +11,7 @@ namespace Core.Repositories
     {
         Task<IEnumerable<Club>> GetAllClubsAsync();
         Task<Club> GetWithClubByIdAsync(int id);
+        Task<Club> GetClubByMailAsync(string mail);
         Task<Club> GetCommentByIdAsync(int id);
         Task CreateCommentAsync(Comment comment);
         List<Club> GetClubByFiltersAsync(Club club); // Task<Club>

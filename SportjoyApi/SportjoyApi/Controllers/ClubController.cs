@@ -86,6 +86,22 @@ namespace Api.Controllers
             return Ok(club);
         }
 
+        [Authorize]
+        [HttpPost("update-club")]
+        public async Task<ActionResult<IEnumerable<PlayerDTO>>> UpdateClub(Club club)
+        {
+            var updateItem = await _clubService.GetClubByMail(club.Email);
+            if (updateItem != null)
+            {
+                //updateItem.Name = user.Name;
+                //updateItem.Surname = user.Surname;
+                //updateItem.Email = user.Email;
+                //await _userService.UpdateUser(updateItem);
+            }
+
+            return Ok();
+        }
+
         [HttpGet("comment")]
         public async Task<ActionResult<IEnumerable<ClubDTO>>> GetCommentById(int id)
         {

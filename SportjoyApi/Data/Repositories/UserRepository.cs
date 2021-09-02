@@ -29,6 +29,11 @@ namespace Sporjoy.Data.Repositories
                 .SingleOrDefaultAsync(a => a.Id == id);
         }
 
+        public async Task UpdateAsync(User user)
+        {
+            SporjoyDbContext.Users.Update(user);
+        }
+
         private SporjoyDbContext SporjoyDbContext
         {
             get { return Context as SporjoyDbContext; }

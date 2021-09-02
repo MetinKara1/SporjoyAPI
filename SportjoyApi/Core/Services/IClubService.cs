@@ -10,6 +10,7 @@ namespace Core.Services
     {
         Task<IEnumerable<Club>> GetAllClubs();
         Task<Club> GetClubById(int id);
+        Task<Club> GetClubByMail(string mail);
         List<Club> GetClubByFilters(Club club); // Task<Club>
         Task<Club> GetCommentsById(int id);
         Task CreateComment(Comment comment);

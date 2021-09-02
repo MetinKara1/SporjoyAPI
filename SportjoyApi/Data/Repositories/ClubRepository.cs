@@ -33,6 +33,11 @@ namespace Sporjoy.Data.Repositories
                 .SingleOrDefaultAsync(a => a.Id == id);
         }
 
+        public Task<Club> GetClubByMailAsync(string mail)
+        {
+            return SporjoyDbContext.Clubs.SingleOrDefaultAsync(a => a.Email == mail);
+        }
+
         public Task<Club> GetCommentByIdAsync(int id)
         {
             return SporjoyDbContext.Clubs
@@ -43,6 +48,11 @@ namespace Sporjoy.Data.Repositories
         public async Task CreateCommentAsync(Comment comment)
         {
             SporjoyDbContext.Comments.Add(comment);
+        }
+
+        public async Task UpdateAsync(Club club)
+        {
+            SporjoyDbContext.Clubs.Update(club);
         }
 
         public List<Club> GetClubByFiltersAsync(Club club) // Task<Club>

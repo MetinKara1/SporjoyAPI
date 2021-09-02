@@ -10,7 +10,7 @@ using Sporjoy.Data;
 namespace Data.Migrations
 {
     [DbContext(typeof(SporjoyDbContext))]
-    [Migration("20210829193754_first")]
+    [Migration("20210902220303_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -267,6 +267,9 @@ namespace Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RefreshToken")

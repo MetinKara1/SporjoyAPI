@@ -56,6 +56,7 @@ namespace Services
 
         public async Task UpdateUser(User userToBeUpdated)
         {
+            await _unitOfWork.Users.UpdateAsync(userToBeUpdated);
             await _unitOfWork.CommitAsync();
         }
     }

@@ -49,6 +49,11 @@ namespace Services
             return await _unitOfWork.Clubs.GetByIdAsync(id);
         }
 
+        public async Task<Club> GetClubByMail(string mail)
+        {
+            return await _unitOfWork.Clubs.GetClubByMailAsync(mail);
+        }
+
         public async Task UpdateClub(Club clubToBeUpdated)
         {
             await _unitOfWork.CommitAsync();

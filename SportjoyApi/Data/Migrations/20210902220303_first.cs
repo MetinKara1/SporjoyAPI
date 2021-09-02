@@ -108,6 +108,7 @@ namespace Data.Migrations
                     Name = table.Column<string>(nullable: true),
                     Surname = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
                     RefreshToken = table.Column<string>(nullable: true),
                     RefreshTokenEndDate = table.Column<DateTime>(nullable: true)

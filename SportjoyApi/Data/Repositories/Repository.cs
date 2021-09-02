@@ -27,6 +27,12 @@ namespace Sporjoy.Data.Repositories
             await Context.Set<TEntity>().AddRangeAsync(entities);
         }
 
+        public async Task UpdateAsync(TEntity entity)
+        {
+            Context.Set<TEntity>().Update(entity); // await
+
+        }
+
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
             return Context.Set<TEntity>().Where(predicate);
@@ -40,6 +46,11 @@ namespace Sporjoy.Data.Repositories
         public ValueTask<TEntity> GetByIdAsync(int id)
         {
             return Context.Set<TEntity>().FindAsync(id);
+        }
+
+        public ValueTask<TEntity> GetByMailAsync(string mail)
+        {
+            return Context.Set<TEntity>().FindAsync(mail);
         }
 
         //public ValueTask<TEntity> GetByEmailAndPasswordAsync(string email, string password)
