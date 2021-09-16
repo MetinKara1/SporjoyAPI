@@ -17,6 +17,9 @@ namespace Sporjoy.Data
         public DbSet<Club> Clubs { get; set; }
         public DbSet<ClubProperties> ClubProperties { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Branchs> Branchs { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<County> Counties { get; set; }
 
         public SporjoyDbContext(DbContextOptions<SporjoyDbContext> options)
             : base(options)

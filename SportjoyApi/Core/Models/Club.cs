@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -34,7 +35,7 @@ namespace Core.Models
         public int TrainingCountPerWeek { get; set; }
         public string Photos { get; set; }
         public string Videos { get; set; }
-        public string PeymentType { get; set; }
+        public PeymentTypes PeymentType { get; set; }
         public string Branch { get; set; }
         public MembershipType MembershipType { get; set; }
         public ICollection<ClubProperties> ClubProterties { get; set; }

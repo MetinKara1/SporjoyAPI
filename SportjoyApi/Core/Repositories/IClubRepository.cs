@@ -13,7 +13,11 @@ namespace Core.Repositories
         Task<Club> GetWithClubByIdAsync(int id);
         Task<Club> GetClubByMailAsync(string mail);
         Task<Club> GetCommentByIdAsync(int id);
+        List<Branchs> GetBranchsAsync();
+        List<City> GetCitiesAsync();
+        List<County> GetCountiesAsync();
         Task CreateCommentAsync(Comment comment);
+        Task AddBranchCityAndCountyAsync(Branchs branch, City city, County county);
         List<Club> GetClubByFiltersAsync(Club club); // Task<Club>
     }
 }

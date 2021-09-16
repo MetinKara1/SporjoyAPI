@@ -77,12 +77,17 @@ namespace Api.Controllers
         public async Task<ActionResult<IEnumerable<PlayerDTO>>> CheckPhone(string phone)
         {
             var users = await _userService.GetAllUsers();
-            var user = users.Where(x => x.Phone == phone);
+            var user = users.First(x => x.Phone == phone);
             if (user != null)
             {
+                Random generator = new Random();
+                var number = generator.Next(0, 1000000).ToString("D6");
+                var sms = new Entegration.Executer(phone, number);
                 var result = new
                 {
-                    success = true
+                    success = true,
+                    number = number,
+                    user = user
                 };
                 return Ok(result);
             } 

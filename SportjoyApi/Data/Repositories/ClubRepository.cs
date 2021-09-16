@@ -45,6 +45,29 @@ namespace Sporjoy.Data.Repositories
                 .SingleOrDefaultAsync(a => a.Id == id);
         }
 
+        public List<Branchs> GetBranchsAsync()
+        {
+            return  SporjoyDbContext.Branchs.ToListAsync().Result.FindAll(x => x.Id != null);
+            
+        }
+
+        public List<City> GetCitiesAsync()
+        {
+            return SporjoyDbContext.Cities.ToListAsync().Result.FindAll(x => x.Id != null);
+        }
+
+        public List<County> GetCountiesAsync()
+        {
+            return SporjoyDbContext.Counties.ToListAsync().Result.FindAll(x => x.Id != null);
+        }
+
+        public async Task AddBranchCityAndCountyAsync(Branchs branch, City city, County county)
+        {
+            SporjoyDbContext.Branchs.Add(branch);
+            SporjoyDbContext.Cities.Add(city);
+            SporjoyDbContext.Counties.Add(county);
+        }
+
         public async Task CreateCommentAsync(Comment comment)
         {
             SporjoyDbContext.Comments.Add(comment);
@@ -57,7 +80,7 @@ namespace Sporjoy.Data.Repositories
 
         public List<Club> GetClubByFiltersAsync(Club club) // Task<Club>
         {
-            return SporjoyDbContext.Clubs.ToListAsync().Result.FindAll(x => x.ClubName == club.ClubName || x.City == club.City || x.County == club.County || x.haveParking == club.haveParking || x.havePrivateLesson == club.havePrivateLesson || x.haveShower == club.haveShower || x.isAvailableForDisabled == club.isAvailableForDisabled || x.PeymentType == club.PeymentType || x.MembershipType == club.MembershipType || x.Branch == club.Branch);
+            return SporjoyDbContext.Clubs.ToListAsync().Result.FindAll(x => (string.IsNullOrEmpty(club.ClubName) || x.ClubName == club.ClubName) && (string.IsNullOrEmpty(club.City) || x.City == club.City) && (string.IsNullOrEmpty(club.County) || x.County == club.County) && (club.haveParking || x.haveParking == club.haveParking) && (!club.havePrivateLesson || x.havePrivateLesson == club.havePrivateLesson) && (!club.haveShower || x.haveShower == club.haveShower) && (!club.isAvailableForDisabled || x.isAvailableForDisabled == club.isAvailableForDisabled) && x.PeymentType == club.PeymentType && x.MembershipType == club.MembershipType && (string.IsNullOrEmpty(club.Branch) || x.Branch == club.Branch));
 
             
 

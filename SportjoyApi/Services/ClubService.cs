@@ -27,6 +27,29 @@ namespace Services
             return newClub;
         }
 
+        public async Task AddBranchCityAndCounty(Branchs branch, City city, County county)
+        {
+            await _unitOfWork.Clubs.AddBranchCityAndCountyAsync(branch, city, county);
+
+            await _unitOfWork.CommitAsync();
+        }
+
+        public List<Branchs> GetBranchs()
+        {
+            return _unitOfWork.Clubs.GetBranchsAsync();
+            //return data;
+        }
+
+        public List<City> GetCities()
+        {
+            return _unitOfWork.Clubs.GetCitiesAsync();
+        }
+
+        public List<County> GetCounties()
+        {
+            return _unitOfWork.Clubs.GetCountiesAsync();
+        }
+
         public async Task DeleteClub(Club club)
         {
             _unitOfWork.Clubs.Remove(club);

@@ -13,7 +13,11 @@ namespace Core.Services
         Task<Club> GetClubByMail(string mail);
         List<Club> GetClubByFilters(Club club); // Task<Club>
         Task<Club> GetCommentsById(int id);
+        List<Branchs> GetBranchs();
+        List<City> GetCities();
+        List<County> GetCounties();
         Task CreateComment(Comment comment);
+        Task AddBranchCityAndCounty(Branchs branch, City city, County county);
         Task<Club> CreateClub(Club newClub);
         Task UpdateClub(Club clubToBeUpdated);
         Task DeleteClub(Club club);

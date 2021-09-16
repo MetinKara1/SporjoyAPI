@@ -37,11 +37,27 @@ namespace Api.Controllers
             this._unitOfWork = unitOfWork;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost("register")]
         public async Task<ActionResult<IEnumerable<ClubDTO>>> CreateClub([FromBody]Club club)
         {
             var createClub = await _clubService.CreateClub(club);
+
+            var branch = new Branchs()
+            {
+                Branch = club.Branch,
+                City = club.City
+            };
+            var city = new City()
+            {
+                CityName = club.City
+            };
+            var county = new County()
+            {
+                CountyName = club.County,
+                City = club.City
+            };
+            await _clubService.AddBranchCityAndCounty(branch, city, county);
 
             return Ok(createClub);
         }
@@ -75,6 +91,42 @@ namespace Api.Controllers
             //var clubResources = _mapper.Map<IEnumerable<Club>, IEnumerable<ClubDTO>>(clubs);
 
             return Ok(clubs);
+        }
+
+        [HttpGet("branchs")]
+        public async Task<ActionResult<IEnumerable<ClubDTO>>> GetBranchs()
+        {
+            var branchs = _clubService.GetBranchs();
+            //var clubResources = _mapper.Map<IEnumerable<Club>, IEnumerable<ClubDTO>>(clubs);
+            var res = new
+            {
+                data = new { result = branchs }
+            };
+            return Ok(res);
+        }
+
+        [HttpGet("cities")]
+        public async Task<ActionResult<IEnumerable<ClubDTO>>> GetCities()
+        {
+            var cities = _clubService.GetCities();
+            //var clubResources = _mapper.Map<IEnumerable<Club>, IEnumerable<ClubDTO>>(clubs);
+            var res = new
+            {
+                data = new {result = cities} 
+            };
+            return Ok(res);
+        }
+
+        [HttpGet("counties")]
+        public async Task<ActionResult<IEnumerable<ClubDTO>>> GetCounties()
+        {
+            var counties = _clubService.GetCounties();
+            //var clubResources = _mapper.Map<IEnumerable<Club>, IEnumerable<ClubDTO>>(clubs);
+            var res = new
+            {
+                data = new { result = counties }
+            };
+            return Ok(res);
         }
 
         [HttpGet("clubDetail")]
