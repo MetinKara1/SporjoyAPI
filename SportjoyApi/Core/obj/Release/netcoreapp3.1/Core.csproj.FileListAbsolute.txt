@@ -1,6 +1,7 @@
 C:\Users\nmeti\OneDrive\Belgeler\GitHub\SporjoyAPI\SportjoyApi\Core\bin\Release\netcoreapp3.1\Core.deps.json
 C:\Users\nmeti\OneDrive\Belgeler\GitHub\SporjoyAPI\SportjoyApi\Core\bin\Release\netcoreapp3.1\Core.dll
 C:\Users\nmeti\OneDrive\Belgeler\GitHub\SporjoyAPI\SportjoyApi\Core\bin\Release\netcoreapp3.1\Core.pdb
+C:\Users\nmeti\OneDrive\Belgeler\GitHub\SporjoyAPI\SportjoyApi\Core\obj\Release\netcoreapp3.1\Core.csprojAssemblyReference.cache
 C:\Users\nmeti\OneDrive\Belgeler\GitHub\SporjoyAPI\SportjoyApi\Core\obj\Release\netcoreapp3.1\Core.AssemblyInfoInputs.cache
 C:\Users\nmeti\OneDrive\Belgeler\GitHub\SporjoyAPI\SportjoyApi\Core\obj\Release\netcoreapp3.1\Core.AssemblyInfo.cs
 C:\Users\nmeti\OneDrive\Belgeler\GitHub\SporjoyAPI\SportjoyApi\Core\obj\Release\netcoreapp3.1\Core.csproj.CoreCompileInputs.cache

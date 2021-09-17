@@ -40,9 +40,41 @@ namespace Api.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<IEnumerable<PlayerDTO>>> CreatePlayer(User user)
         {
-            var createPlayer = await _userService.CreateUser(user);
+            var users = await _userService.GetAllUsers();
 
-            return Ok(createPlayer);
+            var isExistPhone = users.Where(x => x.Phone == user.Phone);
+            if (isExistPhone.ToList().Count > 0)
+            {
+                var response = new
+                {
+                    success = false,
+                    phone = false
+                };
+                return Ok(response);
+            }
+
+            var isExistEmail = users.Where(x => x.Email == user.Email);
+            if (isExistEmail.ToList().Count > 0)
+            {
+                var response = new
+                {
+                    success = false,
+                    email = false
+                };
+                return Ok(response);
+            }
+
+            var createPlayer = await _userService.CreateUser(user);
+            if (createPlayer.Id != 0)
+            {
+                var response = new
+                {
+                    success = true
+                };
+                return Ok(response);
+            }
+
+            return Ok();
         }
 
         [HttpPost("login")]
@@ -51,7 +83,7 @@ namespace Api.Controllers
 
             var users = await _userService.GetAllUsers();
 
-            var user = users.FirstOrDefault(x => x.Email == userLogin.Email);
+            var user = users.FirstOrDefault(x => x.Email == userLogin.Email && x.Password == userLogin.Password);
 
             if (user != null)
             {
