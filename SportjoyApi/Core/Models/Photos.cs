@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Core.Models
 {
-    public class Branchs
+    public class Photos
     {
         public int Id { get; set; }
-        public BranchType Branch { get; set; }
-        public string City { get; set; }
+        public string PhotoUrl { get; set; }
+        public int ClubId { get; set; }
     }
 }

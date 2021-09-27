@@ -54,7 +54,7 @@ namespace Api.Controllers
             {
                 //Token üretiliyor.
                 TokenHandler tokenHandler = new TokenHandler(_configuration);
-                Token token = tokenHandler.CreateAccessToken(user);
+                Token token = tokenHandler.CreateAccessToken();
 
                 //Refresh token Users tablosuna işleniyor.
                 user.RefreshToken = token.RefreshToken;
@@ -100,7 +100,7 @@ namespace Api.Controllers
             if (user != null) // && user?.RefreshTokenEndDate > DateTime.Now
             {
                 TokenHandler tokenHandler = new TokenHandler(_configuration);
-                Token token = tokenHandler.CreateAccessToken(user);
+                Token token = tokenHandler.CreateAccessToken();
 
                 user.RefreshToken = token.RefreshToken;
                 user.RefreshTokenEndDate = token.Expiration.AddMinutes(3);

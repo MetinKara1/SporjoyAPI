@@ -17,6 +17,7 @@ namespace Core.Repositories
         List<City> GetCitiesAsync();
         List<County> GetCountiesAsync();
         Task CreateCommentAsync(Comment comment);
+        Task AddPhotosAsync(ICollection<Photos> photos);
         Task AddBranchCityAndCountyAsync(Branchs branch, City city, County county);
         List<Club> GetClubByFiltersAsync(Club club); // Task<Club>
     }

@@ -26,8 +26,8 @@ namespace Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Branch")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Branch")
+                        .HasColumnType("int");
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
@@ -62,11 +62,11 @@ namespace Data.Migrations
                     b.Property<string>("Adress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AgeGroups")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AgeGroups")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Branch")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("BranchType")
+                        .HasColumnType("int");
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
@@ -74,7 +74,10 @@ namespace Data.Migrations
                     b.Property<string>("ClubName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ContactPerson")
+                    b.Property<string>("ContactPersonName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactPersonSurname")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("County")
@@ -95,14 +98,20 @@ namespace Data.Migrations
                     b.Property<int>("MembershipType")
                         .HasColumnType("int");
 
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("PeymentType")
                         .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Photos")
+                    b.Property<string>("RefreshToken")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RefreshTokenEndDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<float>("SaloonMeters")
                         .HasColumnType("real");
@@ -227,6 +236,26 @@ namespace Data.Migrations
                     b.ToTable("Payments");
                 });
 
+            modelBuilder.Entity("Core.Models.Photos", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClubId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PhotoUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClubId");
+
+                    b.ToTable("Photos");
+                });
+
             modelBuilder.Entity("Core.Models.Player", b =>
                 {
                     b.Property<int>("Id")
@@ -346,6 +375,15 @@ namespace Data.Migrations
                 {
                     b.HasOne("Core.Models.Club", null)
                         .WithMany("Comments")
+                        .HasForeignKey("ClubId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Core.Models.Photos", b =>
+                {
+                    b.HasOne("Core.Models.Club", null)
+                        .WithMany("Photos")
                         .HasForeignKey("ClubId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

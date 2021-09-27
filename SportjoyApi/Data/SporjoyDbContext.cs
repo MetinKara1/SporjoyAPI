@@ -21,6 +21,8 @@ namespace Sporjoy.Data
         public DbSet<City> Cities { get; set; }
         public DbSet<County> Counties { get; set; }
 
+        public DbSet<Photos> Photos { get; set; }
+
         public SporjoyDbContext(DbContextOptions<SporjoyDbContext> options)
             : base(options)
         { }

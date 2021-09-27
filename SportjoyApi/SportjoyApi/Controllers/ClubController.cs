@@ -41,11 +41,45 @@ namespace Api.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<IEnumerable<ClubDTO>>> CreateClub([FromBody]Club club)
         {
+            var clubs = await _clubService.GetAllClubs();
+            var isExistPhone = clubs.Where(x => x.PhoneNumber == club.PhoneNumber);
+            if (isExistPhone.ToList().Count > 0)
+            {
+                var response = new
+                {
+                    success = false,
+                    phone = false
+                };
+                return Ok(response);
+            }
+
+            var isExistEmail = clubs.Where(x => x.Email == club.Email);
+            if (isExistEmail.ToList().Count > 0)
+            {
+                var response = new
+                {
+                    success = false,
+                    email = false
+                };
+                return Ok(response);
+            }
+
+            var photoAdd = _clubService.AddPhotos(club.Photos);
+
             var createClub = await _clubService.CreateClub(club);
+            if (createClub.Id != 0)
+            {
+                var response = new
+                {
+                    success = true
+                };
+                return Ok(response);
+            }
+
 
             var branch = new Branchs()
             {
-                Branch = club.Branch,
+                Branch = club.BranchType,
                 City = club.City
             };
             var city = new City()
@@ -59,9 +93,62 @@ namespace Api.Controllers
             };
             await _clubService.AddBranchCityAndCounty(branch, city, county);
 
-            return Ok(createClub);
+            return Ok();
         }
 
+        [HttpPost("login")]
+        public async Task<ActionResult<Token>> Login([FromBody] Club clubLogin)
+        {
+            var clubs = await _clubService.GetAllClubs();
+
+            var club = clubs.FirstOrDefault(x => x.Email == clubLogin.Email && x.Password == clubLogin.Password);
+
+            if (club != null)
+            {
+                //Token üretiliyor.
+                TokenHandler tokenHandler = new TokenHandler(_configuration);
+                Token token = tokenHandler.CreateAccessToken();
+
+                token.UserId = club.Id;
+
+                //Refresh token Users tablosuna işleniyor.
+                club.RefreshToken = token.RefreshToken;
+                club.RefreshTokenEndDate = token.Expiration.AddHours(2);
+                // buraya bir userService gerekli veya CustomerService kullanıp kaydı öyle atmalıyım.
+                await _unitOfWork.CommitAsync();
+
+                return token;
+            }
+            return null;
+        }
+
+        [HttpGet("check-phone")]
+        public async Task<ActionResult<IEnumerable<PlayerDTO>>> CheckPhone(string phone)
+        {
+            var clubs = await _clubService.GetAllClubs();
+            var club = clubs.Where(x => x.PhoneNumber == phone);
+            if (club.ToList().Count > 0)
+            {
+                Random generator = new Random();
+                var number = generator.Next(0, 1000000).ToString("D6");
+                var sms = new Entegration.Executer(phone, number);
+                var result = new
+                {
+                    success = true,
+                    number = number,
+                    club = club
+                };
+                return Ok(result);
+            }
+            else
+            {
+                var result = new
+                {
+                    success = false
+                };
+                return Ok(result);
+            }
+        }
         //[HttpPost("forgot-password")]
         //public async Task<ActionResult<Club>> ForgotPassword([FromBody] User user)
         //{
@@ -142,16 +229,22 @@ namespace Api.Controllers
         [HttpPost("update-club")]
         public async Task<ActionResult<IEnumerable<PlayerDTO>>> UpdateClub(Club club)
         {
-            var updateItem = await _clubService.GetClubByMail(club.Email);
+            var updateItem = await _clubService.GetClubById(club.Id);
             if (updateItem != null)
             {
-                //updateItem.Name = user.Name;
-                //updateItem.Surname = user.Surname;
-                //updateItem.Email = user.Email;
-                //await _userService.UpdateUser(updateItem);
+                updateItem.BranchType = club.BranchType;
+                updateItem.AgeGroups = club.AgeGroups;
+                updateItem.City = club.City;
+                updateItem.County = club.County;
+                updateItem.MembershipType = club.MembershipType;
+                updateItem.isAvailableForDisabled = club.isAvailableForDisabled;
+                updateItem.havePrivateLesson = club.havePrivateLesson;
+                updateItem.haveParking = club.haveParking;
+                updateItem.haveShower = club.haveShower;
+                await _clubService.UpdateClub(updateItem);
             }
 
-            return Ok();
+            return Ok(updateItem);
         }
 
         [HttpGet("comment")]

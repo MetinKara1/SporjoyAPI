@@ -79,8 +79,10 @@ namespace Services
 
         public async Task UpdateClub(Club clubToBeUpdated)
         {
+            await _unitOfWork.Clubs.UpdateAsync(clubToBeUpdated);
             await _unitOfWork.CommitAsync();
         }
+
 
         public async Task<Club> GetCommentsById(int id)
         {
@@ -90,6 +92,13 @@ namespace Services
         public async Task CreateComment(Comment comment)
         {
             await _unitOfWork.Clubs.CreateCommentAsync(comment);
+
+            await _unitOfWork.CommitAsync();
+        }
+
+        public async Task AddPhotos(ICollection<Photos> photos)
+        {
+            await _unitOfWork.Clubs.AddPhotosAsync(photos);
 
             await _unitOfWork.CommitAsync();
         }

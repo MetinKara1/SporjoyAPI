@@ -80,7 +80,6 @@ namespace Api.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<Token>> Login([FromBody] UserLogin userLogin)
         {
-
             var users = await _userService.GetAllUsers();
 
             var user = users.FirstOrDefault(x => x.Email == userLogin.Email && x.Password == userLogin.Password);
@@ -89,7 +88,7 @@ namespace Api.Controllers
             {
                 //Token üretiliyor.
                 TokenHandler tokenHandler = new TokenHandler(_configuration);
-                Token token = tokenHandler.CreateAccessToken(user);
+                Token token = tokenHandler.CreateAccessToken();
 
                 token.UserId = user.Id;
 
@@ -109,8 +108,8 @@ namespace Api.Controllers
         public async Task<ActionResult<IEnumerable<PlayerDTO>>> CheckPhone(string phone)
         {
             var users = await _userService.GetAllUsers();
-            var user = users.First(x => x.Phone == phone);
-            if (user != null)
+            var user = users.Where(x => x.Phone == phone);
+            if (user.ToList().Count > 0)
             {
                 Random generator = new Random();
                 var number = generator.Next(0, 1000000).ToString("D6");
@@ -166,7 +165,7 @@ namespace Api.Controllers
             if (user != null) // && user?.RefreshTokenEndDate > DateTime.Now
             {
                 TokenHandler tokenHandler = new TokenHandler(_configuration);
-                Token token = tokenHandler.CreateAccessToken(user);
+                Token token = tokenHandler.CreateAccessToken();
 
                 user.RefreshToken = token.RefreshToken;
                 user.RefreshTokenEndDate = token.Expiration.AddMinutes(3);
@@ -195,16 +194,28 @@ namespace Api.Controllers
             var club = new Club();
             if (user != null )
             {
-                club = await _clubService.GetClubByMail(user.Email);
+                var result = new
+                {
+                    user = user,
+                    club = club
+                };
+                return Ok(result);
             }
             //var playerResources = _mapper.Map<IEnumerable<User>, IEnumerable<PlayerDTO>>(users);
-            var result = new 
-            {
-                user = user,
-                club = club
-            };
+            //club = await _clubService.GetClubByMail(user.Email);
 
-            return Ok(result);
+            club = await _clubService.GetClubById(id);
+            if (club != null)
+            {
+                var result = new
+                {
+                    user = user,
+                    club = club
+                };
+
+                return Ok(result);
+            }
+            return Ok();
         }
 
         [Authorize]
@@ -217,6 +228,7 @@ namespace Api.Controllers
                 updateItem.Name = user.Name;
                 updateItem.Surname = user.Surname;
                 updateItem.Email = user.Email;
+                updateItem.Phone = user.Phone;
                 await _userService.UpdateUser(updateItem);
             }
             

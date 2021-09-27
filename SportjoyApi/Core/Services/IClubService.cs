@@ -17,6 +17,7 @@ namespace Core.Services
         List<City> GetCities();
         List<County> GetCounties();
         Task CreateComment(Comment comment);
+        Task AddPhotos(ICollection<Photos> photos);
         Task AddBranchCityAndCounty(Branchs branch, City city, County county);
         Task<Club> CreateClub(Club newClub);
         Task UpdateClub(Club clubToBeUpdated);

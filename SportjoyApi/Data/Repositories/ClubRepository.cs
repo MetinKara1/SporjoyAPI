@@ -73,6 +73,17 @@ namespace Sporjoy.Data.Repositories
             SporjoyDbContext.Comments.Add(comment);
         }
 
+        public async Task AddPhotosAsync(ICollection<Photos> photos)
+        {
+            if (photos.Count > 0)
+            {
+                foreach (var item in photos)
+                {
+                    SporjoyDbContext.Photos.Add(item);
+                }
+            }   
+        }
+
         public async Task UpdateAsync(Club club)
         {
             SporjoyDbContext.Clubs.Update(club);
@@ -80,7 +91,7 @@ namespace Sporjoy.Data.Repositories
 
         public List<Club> GetClubByFiltersAsync(Club club) // Task<Club>
         {
-            return SporjoyDbContext.Clubs.ToListAsync().Result.FindAll(x => (string.IsNullOrEmpty(club.ClubName) || x.ClubName == club.ClubName) && (string.IsNullOrEmpty(club.City) || x.City == club.City) && (string.IsNullOrEmpty(club.County) || x.County == club.County) && (club.haveParking || x.haveParking == club.haveParking) && (!club.havePrivateLesson || x.havePrivateLesson == club.havePrivateLesson) && (!club.haveShower || x.haveShower == club.haveShower) && (!club.isAvailableForDisabled || x.isAvailableForDisabled == club.isAvailableForDisabled) && x.PeymentType == club.PeymentType && x.MembershipType == club.MembershipType && (string.IsNullOrEmpty(club.Branch) || x.Branch == club.Branch));
+            return SporjoyDbContext.Clubs.ToListAsync().Result.FindAll(x => (string.IsNullOrEmpty(club.ClubName) || x.ClubName == club.ClubName) && (string.IsNullOrEmpty(club.City) || x.City == club.City) && (string.IsNullOrEmpty(club.County) || x.County == club.County) && (club.haveParking || x.haveParking == club.haveParking) && (!club.havePrivateLesson || x.havePrivateLesson == club.havePrivateLesson) && (!club.haveShower || x.haveShower == club.haveShower) && (!club.isAvailableForDisabled || x.isAvailableForDisabled == club.isAvailableForDisabled) && x.PeymentType == club.PeymentType && x.MembershipType == club.MembershipType && x.BranchType == club.BranchType);
 
             
 

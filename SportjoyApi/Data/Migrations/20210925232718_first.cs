@@ -13,7 +13,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Branch = table.Column<string>(nullable: true),
+                    Branch = table.Column<int>(nullable: false),
                     City = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -41,9 +41,11 @@ namespace Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ClubName = table.Column<string>(nullable: true),
-                    ContactPerson = table.Column<string>(nullable: true),
+                    ContactPersonName = table.Column<string>(nullable: true),
+                    ContactPersonSurname = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     County = table.Column<string>(nullable: true),
                     Adress = table.Column<string>(nullable: true),
@@ -51,7 +53,7 @@ namespace Data.Migrations
                     ManCoachCount = table.Column<int>(nullable: false),
                     WomenCoachCount = table.Column<int>(nullable: false),
                     TrainingTime = table.Column<DateTime>(nullable: false),
-                    AgeGroups = table.Column<string>(nullable: true),
+                    AgeGroups = table.Column<int>(nullable: false),
                     isAvailableForDisabled = table.Column<bool>(nullable: false),
                     havePrivateLesson = table.Column<bool>(nullable: false),
                     Due = table.Column<int>(nullable: false),
@@ -60,11 +62,12 @@ namespace Data.Migrations
                     haveShower = table.Column<bool>(nullable: false),
                     SaloonMeters = table.Column<float>(nullable: false),
                     TrainingCountPerWeek = table.Column<int>(nullable: false),
-                    Photos = table.Column<string>(nullable: true),
                     Videos = table.Column<string>(nullable: true),
                     PeymentType = table.Column<int>(nullable: false),
-                    Branch = table.Column<string>(nullable: true),
-                    MembershipType = table.Column<int>(nullable: false)
+                    BranchType = table.Column<int>(nullable: false),
+                    MembershipType = table.Column<int>(nullable: false),
+                    RefreshToken = table.Column<string>(nullable: true),
+                    RefreshTokenEndDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -203,6 +206,26 @@ namespace Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Photos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PhotoUrl = table.Column<string>(nullable: true),
+                    ClubId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Photos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Photos_Clubs_ClubId",
+                        column: x => x.ClubId,
+                        principalTable: "Clubs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_ClubProperties_ClubId",
                 table: "ClubProperties",
@@ -211,6 +234,11 @@ namespace Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_ClubId",
                 table: "Comments",
+                column: "ClubId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Photos_ClubId",
+                table: "Photos",
                 column: "ClubId");
         }
 
@@ -233,6 +261,9 @@ namespace Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Payments");
+
+            migrationBuilder.DropTable(
+                name: "Photos");
 
             migrationBuilder.DropTable(
                 name: "Players");
